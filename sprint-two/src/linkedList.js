@@ -11,6 +11,7 @@ var LinkedList = function() {
     }
     if (list.tail !== null) {
       list.tail.next = nodeInstance;
+      nodeInstance.prev = list.tail;
     }
     list.tail = nodeInstance;
   };
@@ -18,6 +19,9 @@ var LinkedList = function() {
   list.removeHead = function() {
     var oldHeadVal = list.head.value;
     list.head = list.head.next;
+    if (list.head !== null) {
+      list.head.prev = null;
+    }
     return oldHeadVal;
   };
 
@@ -37,6 +41,7 @@ var Node = function(value) {
   var node = {};
 
   node.value = value;
+  node.prev = null;
   node.next = null;
 
   return node;
