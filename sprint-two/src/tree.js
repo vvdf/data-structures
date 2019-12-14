@@ -12,6 +12,7 @@ var treeMethods = {};
 
 treeMethods.addChild = function(value) {
   var newChild = Tree(value);
+  newChild.parent = this;
   this.children.push(newChild);
 };
 
@@ -28,6 +29,14 @@ treeMethods.contains = function(target) {
   } else {
     return false;
   }
+};
+
+treeMethods.searchWholeTree = function(target) {
+  var root = this;
+  while (root.hasOwnProperty('parent')) {
+    root = root.parent;
+  }
+  return root.contains(target);
 };
 
 
