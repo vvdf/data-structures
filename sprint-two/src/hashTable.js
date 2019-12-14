@@ -1,8 +1,9 @@
 
 
-var HashTable = function(base_limit) {
-  if (base_limit === undefined) { this._limit = 8; }
-  else { this._limit = base_limit; }
+var HashTable = function(baseLimit) {
+  if (baseLimit === undefined) {
+    this._limit = 8;
+  } else { this._limit = baseLimit; }
   this._storage = LimitedArray(this._limit);
   this._length = 0;
 };
@@ -40,7 +41,7 @@ HashTable.prototype.insert = function(k, v) {
 
   // evaluate hashtable needs for resizing;
   // if (length / limit) >= .75
-    // resize/repopulate
+  // resize/repopulate
   var fillRatio = this._length / this._limit;
   if (fillRatio >= 0.75) {
     var bigLimit = this._limit * 2;
@@ -88,7 +89,7 @@ HashTable.prototype.remove = function(k) {
 
   // evaluate hashtable needs for resizing;
   // if (length / limit) <= .25
-    // resize/repopulate
+  // resize/repopulate
   var fillRatio = this._length / this._limit;
   if (fillRatio <= 0.25 && this._limit > 8) {
     var smallLimit = this._limit / 2;
@@ -117,7 +118,7 @@ HashTable.prototype.populate = function(toHashStorage, updatedLimit) {
       }
     }
   }
-}
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
