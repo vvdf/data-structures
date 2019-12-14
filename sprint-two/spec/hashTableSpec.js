@@ -73,4 +73,16 @@ describe('hashTable', function() {
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
   });
+
+  it ('accept non-string keys and hash them correctly', function() {
+    hashTable.insert(2, 'two');
+    hashTable.remove(2);
+    hashTable.insert({}, 'emptyObj');
+    hashTable.insert(3, 'three');
+    expect(hashTable.retrieve(3)).to.equal('three');
+    expect(hashTable.retrieve(2)).to.equal(undefined);
+    expect(hashTable.retrieve({})).to.equal('emptyObj');
+  });
 });
+
+//expand functionality to allow access with non-string keys
