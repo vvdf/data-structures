@@ -6,6 +6,9 @@ var HashTable = function() {
 };
 
 HashTable.prototype.insert = function(k, v) {
+  if (typeof k !== 'string') {
+    k = JSON.stringify(k);
+  }
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (this._storage.get(index) === undefined) {
     //if not, set(index, []) to start a new bucket
@@ -22,7 +25,7 @@ HashTable.prototype.insert = function(k, v) {
       }
     }
     return false;
-  }
+  };
 
   if (!keyExists()) {
     var tuple = [k, v];
@@ -31,6 +34,9 @@ HashTable.prototype.insert = function(k, v) {
 };
 
 HashTable.prototype.retrieve = function(k) {
+  if (typeof k !== 'string') {
+    k = JSON.stringify(k);
+  }
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index);
   //iterate over everything in the bucket
@@ -44,6 +50,9 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
+  if (typeof k !== 'string') {
+    k = JSON.stringify(k);
+  }
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index);
   //iterate over everything in the bucket
@@ -60,6 +69,11 @@ HashTable.prototype.remove = function(k) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ constructor   O(1)
+ .insert       O(n)
+ .retrieve     O(n)
+ .remove       O(n)
+ With resizing implemented, the above would become O(1) for average use case
  */
 
 
