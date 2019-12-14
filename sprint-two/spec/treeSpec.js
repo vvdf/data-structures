@@ -41,4 +41,20 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should assign parent to children', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild('I am a number');
+    expect(tree.children[0].children[0].parent.value).to.equal(5);
+    expect(tree.children[0].parent.value).to.equal(undefined);
+    expect(tree.parent).to.equal(undefined);
+  });
+
+  it('should search whole tree including parents', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    expect(tree.children[0].children[0].searchWholeTree(6)).to.equal(true);
+  });
+
 });
