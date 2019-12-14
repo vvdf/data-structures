@@ -52,4 +52,12 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should be able to traverse to head from tail', function() {
+    linkedList.addToTail(10);
+    linkedList.addToTail(11);
+    linkedList.addToTail(50);
+    expect(linkedList.tail.value).to.equal(50);
+    expect(linkedList.tail.prev.value).to.equal(11);
+    expect(linkedList.tail.prev.prev.value).to.equal(10);
+  });
 });
